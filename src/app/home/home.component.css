@@ -1,0 +1,17 @@
+/* Remove default background and text color for accordion headers */
+.accordion-button {
+    background-color: transparent; /* Remove background color */
+    color: inherit; /* Inherit text color */
+    border: none; /* Remove border */
+}
+
+/* Style when the accordion is collapsed (remains the same) */
+.accordion-button:not(.collapsed) {
+    background-color: transparent; /* Keep transparent when expanded */
+    color: inherit; /* Keep text color unchanged */
+}
+
+/* Optional: Remove focus outline */
+.accordion-button:focus {
+    box-shadow: none;
+}

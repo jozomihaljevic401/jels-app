@@ -1,0 +1,39 @@
+<div class="modal-backdrop" *ngIf="isVisible" (click)="closeModal()"></div>
+<div class="modal fade" tabindex="-1" [ngClass]="{ 'show': isVisible }" [ngStyle]="{ 'display': isVisible ? 'block' : 'none' }">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ title }}</h5>
+                <button type="button" class="btn-close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body" *ngIf="itemForm">
+                <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="category">Kategorija</label>
+                        <select id="category" class="form-select" formControlName="category">
+                            <option *ngFor="let category of categories" [value]="category">
+                                {{ category }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="name">Naziv</label>
+                        <input id="name" type="text" class="form-control" formControlName="name">
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="description">Napomena</label>
+                        <textarea id="description" class="form-control" formControlName="description"></textarea>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="quantity">Količina</label>
+                        <input id="quantity" type="number" class="form-control" formControlName="quantity">
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Spremi</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Zatvori</button>
+            </div>
+        </div>
+    </div>
+</div>
