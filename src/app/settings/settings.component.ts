@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 import {Item} from "../models/item.model";
@@ -22,12 +22,31 @@ export class SettingsComponent implements OnInit{
     selectedCategory: string = '';
     selectedIndex: number = -1;
 
+    @ViewChild('editCategoryModal') editCategoryModal?: ElementRef;
+
     constructor(
         private itemService: ItemService) {
     }
 
     ngOnInit() {
         this.getAllItems();
+    }
+
+    closeModal() {
+        if (this.editCategoryModal) {
+            const modalElement = this.editCategoryModal.nativeElement;
+
+            // Remove the 'show' class
+            modalElement.classList.remove('show');
+            // Set display to none
+            modalElement.style.display = 'none';
+
+            // Remove the backdrop
+            const backdrop = document.querySelector('.modal-backdrop');
+            if (backdrop) {
+                backdrop.remove();
+            }
+        }
     }
 
     getAllItems() {
@@ -56,6 +75,7 @@ export class SettingsComponent implements OnInit{
             this.itemService.addNewCategoryToFirestore(newCategoryItem).then(() => {
                 console.log('Item with new category added successfully!');
                 this.getAllItems();
+                this.newCategory = '';
             })
                 .catch((error) => {
                     console.error('Error adding item: ', error);
@@ -81,14 +101,7 @@ export class SettingsComponent implements OnInit{
         if (this.selectedIndex >= 0) {
             this.updateCategoryInBothCollections(this.selectedCategory, this.categories[this.selectedIndex]);
         }
-
-        // Hide the modal after updating
-        // const modalElement = document.getElementById('editCategoryModal');
-        // if (modalElement) {
-        //     // Create a new Bootstrap modal instance
-        //     const modal = new bootstrap.Modal(modalElement);
-        //     modal.hide(); // Properly hide the modal
-        // }
+        this.closeModal();
     }
 
     updateCategoryInBothCollections(newCategory: string, oldCategory: string) {
@@ -106,20 +119,6 @@ export class SettingsComponent implements OnInit{
         }).catch((err) => {
             console.log('Something went wrong', err);
         })
-    }
-
-    confirmAndDeleteItemsByCategory() {
-        // Show a confirmation dialog
-        // const userConfirmed = window.confirm(`Are you sure you want to delete all items in the "${category}" category? This action cannot be undone.`);
-        //
-        // if (userConfirmed) {
-        //     // Proceed with the deletion if the user confirms
-        //     deleteItemsByCategory(category);
-        //     alert('All items in the category have been deleted.');
-        // } else {
-        //     // Optionally, you can notify the user that the deletion was cancelled
-        //     alert('Deletion cancelled.');
-        // }
     }
 
     deleteCategory(category: string, i: number) {
