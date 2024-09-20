@@ -51,9 +51,9 @@
                                 <span *ngIf="item.description.length <= 20">{{ item.description }}</span>
                             </span>
                             <div class="icon-container ms-auto">
-                                <i class="fas fa-plus-circle fa-lg me-2" (click)="addItemToSelectedList(item)"></i>
-                                <i class="fas fa-pencil-alt fa-lg me-2" (click)="openModalShoppingItem(item, true)"></i>
-                                <i class="fas fa-trash-alt fa-lg" (click)="deleteItem(item.id)"></i>
+                                <i class="fas fa-plus-circle fa-lg me-2 icon-click-effect" (click)="addItemToSelectedList(item)"></i>
+                                <i class="fas fa-pencil-alt fa-lg me-2 icon-click-effect" (click)="openModalShoppingItem(item, true)"></i>
+                                <i class="fas fa-trash-alt fa-lg icon-click-effect" (click)="deleteItem(item.id)"></i>
                             </div>
                         </li>
                     </ul>
@@ -77,8 +77,8 @@
                         <span *ngIf="shoppingListItem.description.length <= 20">{{ shoppingListItem.description }}</span>
                     </span>
                         <div class="icon-container ms-auto">
-                            <i class="fas fa-pencil-alt fa-lg me-2" (click)="openModalSelectedItem(shoppingListItem, true)" style="cursor: pointer;"></i>
-                            <i class="fas fa-minus-circle fa-lg" (click)="removeItemFromSelectedList(shoppingListItem)" style="cursor: pointer;"></i>
+                            <i class="fas fa-pencil-alt fa-lg me-2 icon-click-effect" (click)="openModalSelectedItem(shoppingListItem, true)" style="cursor: pointer;"></i>
+                            <i class="fas fa-minus-circle fa-lg icon-click-effect" (click)="removeItemFromSelectedList(shoppingListItem)" style="cursor: pointer;"></i>
                         </div>
                     </li>
                 </ul>

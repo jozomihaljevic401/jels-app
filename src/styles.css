@@ -32,4 +32,12 @@
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='black' stroke-width='3' stroke-linecap='round' d='M 5 5 L 25 25 M 25 5 L 5 25'/%3E%3C/svg%3E"); /* X icon */
 }
 
+.icon-click-effect {
+    transition: transform 0.1s ease-in-out;
+}
+
+.icon-click-effect:active {
+    transform: scale(0.6); /* Shrinks the icon */
+}
+
 
