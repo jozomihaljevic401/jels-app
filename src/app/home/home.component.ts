@@ -181,7 +181,7 @@ export class HomeComponent implements OnInit{
         this.showCart = !this.showCart;
     }
 
-    onAccordionClick($event: MouseEvent) {
-        console.log($event);
+    refresh() {
+        console.log('refresh')
     }
 }

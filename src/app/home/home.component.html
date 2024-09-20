@@ -1,12 +1,18 @@
 <div class="container mt-4">
     <div class="input-group mb-3 flex-column">
-        <!-- First Button -->
-        <div class="d-grid gap-2">
-            <button class="btn btn-outline-secondary" type="button" (click)="addNewItem()">Novi artikal</button>
+        <div class="row g-2">
+            <div class="col">
+                <button class="btn btn-outline-secondary w-100" type="button" (click)="addNewItem()">Novi artikal</button>
+            </div>
+            <div class="col">
+                <button class="btn btn-outline-secondary w-100" type="button" (click)="refresh()">Osvježi</button>
+            </div>
         </div>
 
+
+
         <!-- Switches in one line -->
-        <div class="d-flex justify-content-between mt-3">
+        <div class="d-flex justify-content-between">
             <!-- Second Switch -->
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="itemsListSwitch" (change)="toggleAllItemsList()">
