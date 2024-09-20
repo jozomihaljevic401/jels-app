@@ -5,11 +5,6 @@ td i {
     margin-bottom: 0; /* Remove any bottom margin */
 }
 
-/* Optional: Ensure no extra margin or padding */
-td {
-    padding: 0.5rem; /* Adjust padding as needed */
-}
-
 /* Add spacing between icons if not using Bootstrap's spacing classes */
 td i + i {
     margin-left: 10px; /* Adjust spacing between icons */
@@ -18,4 +13,6 @@ td i + i {
 /* Optional: Adjust vertical alignment of Flexbox container */
 .d-flex {
     align-items: center; /* Ensure items are centered vertically */
+    height: 2.5rem;
 }
+
