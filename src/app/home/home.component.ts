@@ -182,6 +182,7 @@ export class HomeComponent implements OnInit{
     }
 
     refresh() {
-        console.log('refresh')
+        this.getAllItems();
+        this.getShoppingListItems();
     }
 }
