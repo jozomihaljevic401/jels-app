@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {ItemModalComponent} from "../item-modal/item-modal.component";
 import {CommonModule, NgForOf, NgIf} from "@angular/common";
 import {RouterOutlet} from "@angular/router";
@@ -35,14 +35,15 @@ export class HomeComponent implements OnInit{
     shoppingListItems!: any;
     showCart: boolean = false;
     showItemsList: boolean = false;
-    openAccordionItems: number[] = [];
 
     @ViewChild('modalShoppingListItem') modalShoppingListItem?: ItemModalComponent;
     @ViewChild('modalSelectedItem') modalSelectedItem?: ItemModalComponent;
+    @ViewChild('toastContainerRef', { static: true }) toastContainerRef!: ElementRef;
 
     constructor(
         private firestore: Firestore,
-        private itemService: ItemService) {
+        private itemService: ItemService,
+        private renderer: Renderer2) {
     }
 
     ngOnInit() {
@@ -138,8 +139,9 @@ export class HomeComponent implements OnInit{
         if (!existingItem) {
             this.selectedItems.push(item);
             this.updateSelectedItemsInFirestore();
+            this.showToast('Artikal je uspješno dodan u popis', 'success');
         } else {
-            console.log('This item is already in the shopping list');
+            this.showToast('Ovaj artikal je već u popisu!', 'danger');
         }
     }
 
@@ -184,5 +186,46 @@ export class HomeComponent implements OnInit{
     refresh() {
         this.getAllItems();
         this.getShoppingListItems();
+    }
+
+    showToast(message: string, type: 'success' | 'danger') {
+        // Create a new toast element
+        const toastElement = this.renderer.createElement('div');
+        toastElement.classList.add('toast', 'align-items-center', 'text-white', 'border-0', `bg-${type}`);
+        toastElement.setAttribute('role', 'alert');
+        toastElement.setAttribute('aria-live', 'assertive');
+        toastElement.setAttribute('aria-atomic', 'true');
+        toastElement.style.display = 'block'; // Ensure it's visible
+
+        // Create the toast body with the message
+        const toastBody = this.renderer.createElement('div');
+        toastBody.classList.add('toast-body');
+        toastBody.innerHTML = message;
+
+        // Create a close button for the toast
+        const closeButton = this.renderer.createElement('button');
+        closeButton.classList.add('btn-close', 'btn-close-white', 'me-2', 'm-auto');
+        closeButton.setAttribute('aria-label', 'Close');
+        this.renderer.listen(closeButton, 'click', () => {
+            this.renderer.removeChild(this.toastContainerRef.nativeElement, toastElement);
+        });
+
+        // Create a div to hold the close button and message
+        const toastContent = this.renderer.createElement('div');
+        toastContent.classList.add('d-flex');
+        this.renderer.appendChild(toastContent, toastBody);
+        this.renderer.appendChild(toastContent, closeButton);
+
+        // Add content to the toast element
+        this.renderer.appendChild(toastElement, toastContent);
+
+        // Append the toast to the container
+        this.renderer.appendChild(this.toastContainerRef.nativeElement, toastElement);
+        toastElement.classList.add('show');
+
+        // Automatically hide the toast after a delay (e.g., 2 seconds)
+        setTimeout(() => {
+            this.renderer.removeChild(this.toastContainerRef.nativeElement, toastElement);
+        }, 2000); // Adjust the delay as needed
     }
 }

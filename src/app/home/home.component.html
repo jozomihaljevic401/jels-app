@@ -86,7 +86,9 @@
         </div>
     </div>
 
-
+    <!-- Toast container for stacked toasts (at the top center) -->
+    <div #toastContainerRef class="toast-container position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 1055;">
+    </div>
 
     <app-item-modal #modalShoppingListItem (updateCompleted)="getAllItems()">
         <p>This is the content inside the modal!</p>
