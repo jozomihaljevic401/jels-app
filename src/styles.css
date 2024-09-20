@@ -5,3 +5,31 @@
 .me-2 {
     margin-right: 1rem !important;
 }
+
+.navbar-toggler {
+    position: relative;
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+    background: transparent; /* Make background transparent */
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active {
+    outline: none; /* Remove outline when focused or active */
+    box-shadow: none; /* Remove any box shadow */
+}
+
+/* Transition for smooth animation */
+.navbar-toggler-icon {
+    transition: background-image 0.3s ease; /* Smooth transition for background change */
+}
+
+.navbar-toggler.collapsed .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='black' stroke-width='3' stroke-linecap='round' d='M 0 5 H 30 M 0 15 H 30 M 0 25 H 30'/%3E%3C/svg%3E"); /* Hamburger icon */
+}
+
+.navbar-toggler:not(.collapsed) .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='black' stroke-width='3' stroke-linecap='round' d='M 5 5 L 25 25 M 25 5 L 5 25'/%3E%3C/svg%3E"); /* X icon */
+}
+
+

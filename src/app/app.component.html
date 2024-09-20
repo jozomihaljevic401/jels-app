@@ -6,19 +6,19 @@
     <!--            <i class="fas fa-shopping-cart"></i>-->
     <!--            <span *ngIf="itemCount > 0" class="badge">{{ itemCount }}</span>-->
     <!--        </div>-->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" [routerLink]="['/home']">Home</a>
+                        <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/settings']">Postavke</a>
+                        <a class="nav-link" routerLink="/settings" routerLinkActive="active">Postavke</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/about']">O aplikaciji</a>
+                        <a class="nav-link" routerLink="/about" routerLinkActive="active">O aplikaciji</a>
                     </li>
                 </ul>
             </div>
