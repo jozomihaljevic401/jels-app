@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit{
     }
 
     getSafeCategoryId(category: string): string {
-        return category.replace(/\s+/g, '');
+        return category.replace(/\s+/g, '').replace(/[\/]/g, '-');
     }
 
     openModalShoppingItem(item: any, edit: boolean) {

@@ -15,3 +15,15 @@
 .accordion-button:focus {
     box-shadow: none;
 }
+
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.custom-accordion-body {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+}

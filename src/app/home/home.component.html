@@ -42,14 +42,18 @@
             </h2>
             <div [id]="'collapse-' + getSafeCategoryId(category)" class="accordion-collapse collapse"
                  [attr.data-bs-parent]="'#categoryAccordion'">
-                <div class="accordion-body">
+                <div class="accordion-body custom-accordion-body">
                     <ul class="list-group">
                         <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of getItemsByCategory(category)">
-                            {{ item.name }} - {{ item.quantity }} {{ item.description }}
+                            <span class="text-truncate" style="max-width: 70%;">
+                                {{ item.name }} - {{ item.quantity }}
+                                <span *ngIf="item.description.length > 20">{{ item.description | slice:0:20 }}...</span>
+                                <span *ngIf="item.description.length <= 20">{{ item.description }}</span>
+                            </span>
                             <div class="icon-container ms-auto">
-                                <i class="fas fa-plus-circle me-2" (click)="addItemToSelectedList(item)"></i>
-                                <i class="fas fa-pencil-alt me-2" (click)="openModalShoppingItem(item, true)"></i>
-                                <i class="fas fa-trash-alt" (click)="deleteItem(item.id)"></i>
+                                <i class="fas fa-plus-circle fa-lg me-2" (click)="addItemToSelectedList(item)"></i>
+                                <i class="fas fa-pencil-alt fa-lg me-2" (click)="openModalShoppingItem(item, true)"></i>
+                                <i class="fas fa-trash-alt fa-lg" (click)="deleteItem(item.id)"></i>
                             </div>
                         </li>
                     </ul>
@@ -66,10 +70,16 @@
                 <hr>
                 <h4>{{ category }}</h4>
                 <ul class="list-group">
-                    <li class="list-group-item" *ngFor="let shoppingListItem of getShoppingListItemsByCategory(category)">
-                        {{ shoppingListItem.name }} - {{ shoppingListItem.quantity }} {{ shoppingListItem.description }}
-                        <i class="fas fa-pencil-alt" (click)="openModalSelectedItem(shoppingListItem, true)"></i>
-                        <i class="fas fa-minus-circle" (click)="removeItemFromSelectedList(shoppingListItem)"></i>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let shoppingListItem of getShoppingListItemsByCategory(category)">
+                    <span class="text-truncate" style="max-width: 70%;">
+                        {{ shoppingListItem.name }} - {{ shoppingListItem.quantity }}
+                        <span *ngIf="shoppingListItem.description.length > 20">{{ shoppingListItem.description | slice:0:20 }}...</span>
+                        <span *ngIf="shoppingListItem.description.length <= 20">{{ shoppingListItem.description }}</span>
+                    </span>
+                        <div class="icon-container ms-auto">
+                            <i class="fas fa-pencil-alt fa-lg me-2" (click)="openModalSelectedItem(shoppingListItem, true)" style="cursor: pointer;"></i>
+                            <i class="fas fa-minus-circle fa-lg" (click)="removeItemFromSelectedList(shoppingListItem)" style="cursor: pointer;"></i>
+                        </div>
                     </li>
                 </ul>
             </ng-container>
