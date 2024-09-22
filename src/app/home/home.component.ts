@@ -68,6 +68,7 @@ export class HomeComponent implements OnInit{
         try {
             this.itemService.getSelectedItemsFromFirestore().then((res) => {
                 this.shoppingListItems = res;
+                this.selectedItems = this.shoppingListItems;
                 this.itemCount = this.shoppingListItems.docs?.length;
             });
         } catch (error) {
