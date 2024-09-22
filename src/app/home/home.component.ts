@@ -49,6 +49,13 @@ export class HomeComponent implements OnInit{
     ngOnInit() {
         this.getAllItems();
         this.getShoppingListItems();
+        this.itemService.updateItemCount(this.selectedItems.length);
+
+        // TODO: make cartService move it there maybe?
+        this.itemService.showCart$.subscribe((showCart: boolean) => {
+            this.showItemsList = !showCart;
+            this.showCart = showCart;
+        });
     }
 
     getAllItems() {
@@ -69,7 +76,8 @@ export class HomeComponent implements OnInit{
             this.itemService.getSelectedItemsFromFirestore().then((res) => {
                 this.shoppingListItems = res;
                 this.selectedItems = this.shoppingListItems;
-                this.itemCount = this.shoppingListItems.docs?.length;
+                this.itemCount = this.shoppingListItems.length;
+                this.itemService.updateItemCount(this.itemCount);
             });
         } catch (error) {
             console.error('Error fetching documents: ', error);
@@ -140,6 +148,7 @@ export class HomeComponent implements OnInit{
         if (!existingItem) {
             this.selectedItems.push(item);
             this.updateSelectedItemsInFirestore();
+            this.itemService.updateItemCount(this.selectedItems.length);
             this.showToast('Artikal je uspješno dodan u popis', 'success');
         } else {
             this.showToast('Ovaj artikal je već u popisu!', 'danger');
@@ -176,12 +185,16 @@ export class HomeComponent implements OnInit{
         });
     }
 
-    toggleAllItemsList() {
-        this.showItemsList = !this.showItemsList;
+    toggleAllItemsList(event: Event) {
+        const target = event.target as HTMLInputElement;
+        this.showItemsList = target.checked; // Set the value to the checkbox state
+        console.log('Show items list:', this.showItemsList);
     }
 
-    toggleShoppingItemsList(): void {
-        this.showCart = !this.showCart;
+    toggleShoppingItemsList(event: Event): void {
+        const target = event.target as HTMLInputElement;
+        this.showCart = target.checked; // Update showCart based on the switch state
+        console.log('Show cart:', this.showCart);
     }
 
     refresh() {

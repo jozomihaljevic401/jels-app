@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {addDoc, collection, deleteDoc, doc, Firestore, getDocs, query, updateDoc, where} from "@angular/fire/firestore";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,10 @@ import {addDoc, collection, deleteDoc, doc, Firestore, getDocs, query, updateDoc
 export class ItemService {
     private collectionNameAllItems = 'ShoppingItems';
     private collectionNameSelectedItems = 'SelectedItems';
+    private itemCount = new BehaviorSubject<number>(0)
+    itemCount$ = this.itemCount.asObservable();
+    private showCartSubject = new BehaviorSubject<boolean>(false);
+    showCart$ = this.showCartSubject.asObservable();
 
     constructor(private firestore: Firestore) { }
 
@@ -88,5 +93,18 @@ export class ItemService {
                 console.log(`Deleted ${docSnapshot.id} from ${coll}`);
             })
         }
+    }
+
+    updateItemCount(newCount: number) {
+        this.itemCount.next(newCount);
+    }
+
+    // Method to toggle cart state
+    showCart() {
+        this.showCartSubject.next(true);
+    }
+
+    hideCart() {
+        this.showCartSubject.next(false);
     }
 }

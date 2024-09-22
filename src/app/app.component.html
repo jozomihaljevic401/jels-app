@@ -2,13 +2,17 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" [routerLink]="['/home']">JelsApp</a>
-    <!--        <div class="cart-container" (click)="viewCart()">-->
-    <!--            <i class="fas fa-shopping-cart"></i>-->
-    <!--            <span *ngIf="itemCount > 0" class="badge">{{ itemCount }}</span>-->
-    <!--        </div>-->
-            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
+            <div class="d-flex ms-auto align-items-center">
+                <div class="cart-container me-3 mt-2" [routerLink]="['/home']" (click)="onCartClick()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span *ngIf="itemCount > 0" class="badge">{{ itemCount }}</span>
+                </div>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
