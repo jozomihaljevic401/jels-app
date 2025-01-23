@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit{
             this.showItemsList = !showCart;
             this.showCart = showCart;
         });
+        this.showItemsList = false;
     }
 
     getAllItems() {
