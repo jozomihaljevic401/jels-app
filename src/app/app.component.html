@@ -1,49 +1,57 @@
 <div class="d-flex flex-column min-vh-100">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" [routerLink]="['/home']">JelsApp</a>
+  <nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" [routerLink]="['/home']">
+        <span class="brand-text">JelsApp</span>
+      </a>
 
       <div class="d-flex ms-auto align-items-center">
-        <div class="cart-container me-3 mt-2" [routerLink]="['/home']" (click)="onCartClick()" *ngIf="isLoggedIn">
+        <div class="cart-button" [routerLink]="['/home']" (click)="onCartClick()" *ngIf="isLoggedIn">
           <i class="fas fa-shopping-cart"></i>
-          <span *ngIf="itemCount > 0" class="badge">{{ itemCount }}</span>
+          <span *ngIf="itemCount > 0" class="cart-badge">{{ itemCount }}</span>
         </div>
-        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <i class="fas fa-bars"></i>
         </button>
       </div>
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/home" routerLinkActive="active">Početna</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/settings" routerLinkActive="active">Postavke</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/about" routerLinkActive="active">O aplikaciji</a>
-          </li>
-          <li class="nav-item" *ngIf="!isLoggedIn">
-            <a class="nav-link" routerLink="/login" routerLinkActive="active">Prijavi se</a>
+          <li class="nav-item" *ngIf="isLoggedIn">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">
+              <i class="fas fa-home"></i> Početna
+            </a>
           </li>
           <li class="nav-item" *ngIf="isLoggedIn">
-            <a class="nav-link" (click)="logout()">Odjavi se</a>
+            <a class="nav-link" routerLink="/settings" routerLinkActive="active">
+              <i class="fas fa-cog"></i> Postavke
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="isLoggedIn">
+            <a class="nav-link" routerLink="/about" routerLinkActive="active">
+              <i class="fas fa-info-circle"></i> O aplikaciji
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="!isLoggedIn">
+            <a class="nav-link login-link" routerLink="/login">
+              <i class="fas fa-sign-in-alt"></i> Prijavi se
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="isLoggedIn">
+            <a class="nav-link logout-link" (click)="logout()">
+              <i class="fas fa-sign-out-alt"></i> Odjavi se
+            </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Main content -->
-  <div class="flex-grow-1">
-    <!-- Your existing content here, including router-outlet -->
+  <div class="flex-grow-1 main-content">
     <router-outlet></router-outlet>
   </div>
 
-  <!-- Footer -->
-  <footer class="text-center mt-4 mb-3">
-    <hr>
+  <footer class="app-footer">
     <div class="container">
       <p class="mb-0">
         &copy; {{ currentYear }} Made by Tatiea

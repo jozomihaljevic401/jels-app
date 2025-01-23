@@ -3,11 +3,12 @@ import {AngularFireAuth, AngularFireAuthModule} from '@angular/fire/compat/auth'
 import { Router } from '@angular/router';
 import {Firestore, collection, getDocs} from '@angular/fire/firestore';
 import {FormsModule} from "@angular/forms";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, AngularFireAuthModule],
+  imports: [CommonModule, FormsModule, AngularFireAuthModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
